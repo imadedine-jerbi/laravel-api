@@ -9,6 +9,11 @@ use Encore\Admin\Layout\Column;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Layout\Row;
 
+/**
+ * 
+ * @author Imadedine Jerbi <contact@imadedinejerbi.com>
+ * 
+ */
 class HomeController extends Controller
 {
     public function index()
