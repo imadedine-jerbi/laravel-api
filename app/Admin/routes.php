@@ -25,12 +25,9 @@ Route::group([
 
     $router->post('invoices', 'InvoiceApiController@create');
     $router->put('invoices/{uuid}', 'InvoiceApiController@update');
-    $router->delete('invoices/{uuid}', 'InvoiceApiController@delete');
     $router->put('items/{uuid}', 'ItemApiController@update');
-    $router->delete('items/{uuid}', 'ItemApiController@delete');
     $router->get('orders/{uuid}', 'OrderApiController@details');
     $router->put('orders/{uuid}', 'OrderApiController@update');
-    $router->delete('orders/{uuid}', 'OrderApiController@delete');
     $router->post('items', 'ItemApiController@create');
     $router->post('orders', 'OrderApiController@create');
 });
@@ -41,11 +38,14 @@ Route::group([
     'middleware' => 'guest',
     'namespace' => config('admin.route.namespace')
         ], function(Router $router) {
-
+    
     $router->get('items', 'ItemApiController@all');
     $router->get('items/{uuid}', 'ItemApiController@details');
     $router->get('orders/', 'OrderApiController@all');
     $router->get('orders/{uuid}', 'OrderApiController@details');
     $router->get('invoices', 'InvoiceApiController@all');
     $router->get('invoices/{uuid}', 'InvoiceApiController@details');
+    $router->delete('items/{uuid}', 'ItemApiController@delete');
+    $router->delete('orders/{uuid}', 'OrderApiController@delete');
+    $router->delete('invoices/{uuid}', 'InvoiceApiController@delete');
 });

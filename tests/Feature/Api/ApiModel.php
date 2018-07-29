@@ -25,6 +25,20 @@ class ApiModel extends TestCase {
         $this->assertSuccesssStatus($responseData, true);
         $this->assertResponseWithDataAndPaging($responseData);
     }
+    
+    /**
+     * 
+     * @param string $apiVersion
+     * @param string $modelRouteName
+     */
+    public function assertSuccessDelete($apiVersion, $modelRouteName, $UUID) {
+
+        $response = $this->delete('/api/' . $apiVersion . '/' . $modelRouteName . '/' . $UUID);
+        $response->assertStatus(200);
+        $responseData = $response->json();
+        $this->assertSuccesssStatus($responseData, true);
+        $this->assertResponseWithData($responseData);
+    }
 
     /**
      * 
@@ -54,6 +68,20 @@ class ApiModel extends TestCase {
         $responseData = $response->json();
         $this->assertBadRequest($responseData);
     }
+    
+    /**
+     * 
+     * @param string $apiVersion
+     * @param string $modelRouteName
+     * @param string $UUID
+     */
+    public function assertBadRequestDelete($apiVersion, $modelRouteName, $UUID = 'XXX') {
+
+        $response = $this->delete('/api/' . $apiVersion . '/' . $modelRouteName . '/' . $UUID);
+        $response->assertStatus(200);
+        $responseData = $response->json();
+        $this->assertBadRequest($responseData);
+    }
 
     /**
      * 
@@ -64,6 +92,20 @@ class ApiModel extends TestCase {
     public function assertNotFoundGetDetails($apiVersion, $modelRouteName, $UUID = 'XXX') {
 
         $response = $this->get('/api/' . $apiVersion . '/' . $modelRouteName . '/' . $UUID);
+        $response->assertStatus(200);
+        $responseData = $response->json();
+        $this->assertNotFound($responseData);
+    }
+    
+    /**
+     * 
+     * @param string $apiVersion
+     * @param string $modelRouteName
+     * @param string $UUID
+     */
+    public function assertNotFoundDelete($apiVersion, $modelRouteName, $UUID = 'XXX') {
+
+        $response = $this->delete('/api/' . $apiVersion . '/' . $modelRouteName . '/' . $UUID);
         $response->assertStatus(200);
         $responseData = $response->json();
         $this->assertNotFound($responseData);

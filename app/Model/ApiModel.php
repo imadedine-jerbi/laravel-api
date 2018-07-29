@@ -27,6 +27,18 @@ abstract class ApiModel extends Model implements ApiModelInterface {
         
         return $publicRecord;
     }
+    
+    /**
+     * 
+     * @param string $uuid
+     * @return boolean
+     */
+    public static function deleteByUUID($uuid) {
+
+        $deleted = self::where('uuid', $uuid)->delete();
+        
+        return $deleted;
+    }
 
     /**
      * 

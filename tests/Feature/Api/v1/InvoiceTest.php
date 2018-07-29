@@ -26,4 +26,12 @@ class InvoiceTest extends ApiModel {
         $this->assertNotFoundGetDetails('v1', 'invoices', Uuid::generate(4)->string);
     }
 
+    public function testDelete() {
+
+        $item = factory(Invoice::class)->create();
+        $this->assertSuccessDelete('v1', 'invoices', $item->uuid);
+        $this->assertBadRequestDelete('v1', 'invoices');
+        $this->assertNotFoundDelete('v1', 'invoices', Uuid::generate(4)->string);
+    }
+
 }

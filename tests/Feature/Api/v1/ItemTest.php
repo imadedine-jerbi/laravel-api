@@ -25,5 +25,13 @@ class ItemTest extends ApiModel {
         $this->assertBadRequestGetDetails('v1', 'items');
         $this->assertNotFoundGetDetails('v1', 'items', Uuid::generate(4)->string);
     }
+    
+    public function testDelete() {
+        
+        $item = factory(Item::class)->create();
+        $this->assertSuccessDelete('v1', 'items', $item->uuid);
+        $this->assertBadRequestDelete('v1', 'items');
+        $this->assertNotFoundDelete('v1', 'items', Uuid::generate(4)->string);
+    }
 
 }

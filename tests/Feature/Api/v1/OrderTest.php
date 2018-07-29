@@ -26,4 +26,12 @@ class OrderTest extends ApiModel {
         $this->assertNotFoundGetDetails('v1', 'orders', Uuid::generate(4)->string);
     }
 
+    public function testDelete() {
+
+        $order = factory(Order::class)->create();
+        $this->assertSuccessDelete('v1', 'orders', $order->uuid);
+        $this->assertBadRequestDelete('v1', 'orders');
+        $this->assertNotFoundDelete('v1', 'orders', Uuid::generate(4)->string);
+    }
+
 }

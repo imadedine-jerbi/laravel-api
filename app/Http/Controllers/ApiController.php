@@ -98,11 +98,11 @@ abstract class ApiController extends BaseController {
             return $this->badRequest();
         }
         
-        $data = $this->modelClass::findByUUID($uuid);
+        $deleted = $this->modelClass::deleteByUUID($uuid);
 
-        if (sizeof($data) > 0) {
+        if ($deleted) {
             
-            //dalete
+            return $this->results(array('uuid' => $uuid));
         } else {
 
             return $this->notFound($uuid);
